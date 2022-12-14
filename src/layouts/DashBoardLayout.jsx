@@ -3,8 +3,9 @@ import { Layout } from './'
 const DashboardLayout = ({children}) => {  
   return (
     <Layout>
-      <p>Dashboard Layout</p>
-      {children}      
+      <div>
+        {children}
+      </div>
     </Layout>
   )
 }

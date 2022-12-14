@@ -69,33 +69,30 @@ export const telFormat = tel => {
   return `${tel.substring(0, 3)} ${tel.substring(3, 6)} ${tel.substring(6, 8)} ${tel.substring(8, 10)}`
 }
 
-export const generateNamePizza = (ingredientes) => {
-  const dictionary = {
-    1: {
-      0: ''
-    },
-    2: {
-      0: 'Mitad',
-      1: 'Mitad'
-    },
-    3: {
-      0: 'Un Cuarto',
-      1: 'Un Cuarto',
-      2: 'Mitad'
-    },
-    4: {
-      0: 'Un Cuarto',
-      1: 'Un Cuarto',
-      2: 'Un Cuarto',
-      3: 'Un Cuarto',
-    }
+export const dateFormat = date => {
+  if(!date) date = new Date()
+
+  const dateObj = new Date(date)
+  const month = dateObj.getMonth()
+  const day = dateObj.getDate()
+  const year = dateObj.getFullYear()
+  const hour = dateObj.getHours()
+  const minutes = dateObj.getMinutes()
+
+  const fechaUTC = new Date( Date.UTC(year, month, day, hour, minutes) )
+  const options = { weekDay: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+
+  const obj = {
+    year: fechaUTC.toLocaleDateString('es-MX', {year: 'numeric'}),
+    month: fechaUTC.toLocaleDateString('es-MX', {month: 'long'}),
+    monthDigit: fechaUTC.toLocaleDateString('es-MX', {month: '2-digit'}),
+    monthShort: fechaUTC.toLocaleDateString('es-MX', {month: 'short'}),
+    day: fechaUTC.toLocaleDateString('es-MX', {day: '2-digit'}),
+    fullDate: fechaUTC.toLocaleDateString('es-MX', options),
+    time: dateObj.getTime(),
   }
 
-  let str = ''
+  obj.date = `${obj.year}-${obj.monthDigit}-${obj.day}`
 
-  ingredientes.map(({name}, i) => {
-    str+= `${dictionary[ingredientes.length][i]} ${name} `
-  })
-
-  return str
+  return obj
 }

@@ -1,11 +1,13 @@
-import { AuthProvider } from "./context"
+import { AuthProvider, DarkModeProvider } from "./context"
 import { AppRouter } from "./routes"
 
 function App() {
   return (
-    <AuthProvider>
-      <AppRouter/>
-    </AuthProvider>
+    <DarkModeProvider>
+      <AuthProvider>
+        <AppRouter/>
+      </AuthProvider>
+    </DarkModeProvider>
   )
 }
 
